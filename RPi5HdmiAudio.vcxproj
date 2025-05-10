@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C65BEC0A-1E4A-415B-B115-44F57551F0E2}</ProjectGuid>
+    <Keyword>Driver</Keyword>
+    <RootNamespace>RPi5HdmiAudio</RootNamespace>
+  </PropertyGroup>
+
+  <Import Project="$(WDKContentRoot)\build\Microsoft.Driver.WDK.props" />
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ConfigurationType>Driver</ConfigurationType>
+    <DriverKMDFVersion>1.27</DriverKMDFVersion>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)\RPi5HdmiAudio\</IntDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <ConfigurationType>Driver</ConfigurationType>
+    <DriverKMDFVersion>1.27</DriverKMDFVersion>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)\RPi5HdmiAudio\</IntDir>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <OmitFramePointers>true</OmitFramePointers>
+    </ClCompile>
+    <Link>
+      <SubSystem>Native</SubSystem>
+      <TargetMachine>MachineARM64</TargetMachine>
+      <DriverName>RPi5HdmiAudio.sys</DriverName>
+      <AdditionalDependencies>NtKern.lib;portcls.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <ClCompile Include="RPi5HdmiAudio.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RPi5HdmiAudio.h" />
+  </ItemGroup>
+
+  <Import Project="$(WDKContentRoot)\build\Microsoft.Driver.WDK.targets" />
+</Project>

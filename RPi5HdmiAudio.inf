@@ -1,0 +1,32 @@
+; RPi5HdmiAudio.inf
+[Version]
+Signature="$WINDOWS NT$"
+Class=MEDIA
+ClassGuid={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%ManufacturerName%
+DriverVer=05/10/2025,1.0.0.0
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTARM64
+
+[Standard.NTARM64]
+%DeviceDesc%=Install, ACPI\RPI5HDMAUDIO
+
+[Install.NTARM64]
+CopyFiles=DriverCopyFiles
+AddService = RPi5HdmiAudio, 0x00000002, ServiceInstaller
+
+[DriverCopyFiles]
+RPi5HdmiAudio.sys
+
+[ServiceInstaller]
+DisplayName    = %ServiceName%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\RPi5HdmiAudio.sys
+
+[Strings]
+ManufacturerName="RPi5 HDMI Audio Driver Co."
+DeviceDesc="Raspberry Pi 5 HDMI Audio"
+ServiceName="RPi5HdmiAudio"
