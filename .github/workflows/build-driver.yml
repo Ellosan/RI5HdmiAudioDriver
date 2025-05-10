@@ -1,0 +1,25 @@
+name: Build Raspberry Pi 5 HDMI Audio Driver
+
+# You can also trigger this manually via the “Run workflow” button
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Build for ARM64
+        run: |
+          msbuild RPi5HdmiAudio.sln /p:Configuration=Release /p:Platform=ARM64
+
+      - name: Upload driver artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: RPi5HdmiAudioDriver
+          path: |
+            ARM64/Release/RPi5HdmiAudio.sys
+            RPi5HdmiAudio.inf
